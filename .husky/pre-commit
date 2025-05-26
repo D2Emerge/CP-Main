@@ -1,4 +1,4 @@
 yarn workspace @code-project/api lint
 yarn workspace @code-project/api tsc
-# yarn workspace @code-project/web lint
-# yarn workspace @code-project/web tsc
+yarn workspace @code-project/web lint
+yarn workspace @code-project/web tsc
