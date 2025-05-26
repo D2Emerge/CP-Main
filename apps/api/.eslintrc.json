@@ -1,0 +1,41 @@
+{
+  "root": true,
+  "ignorePatterns": ["env.js", "src/core/shared/response", "dist"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:jest/recommended"
+  ],
+  "env": {
+    "node": true,
+    "jest": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": "./",
+    "sourceType": "module",
+    "ecmaVersion": 2020
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.ts",
+        "*.tsx",
+        "*.e2e.js",
+        "**/*.spec.js",
+        "**/*.spec.jsx",
+        "**/tools.js"
+      ],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "error",
+        "@typescript-eslint/no-floating-promises": "warn",
+        "@typescript-eslint/no-unsafe-argument": "off",
+        "@typescript-eslint/no-shadow": "error",
+        "no-shadow": "error",
+        "no-undef": "error"
+      }
+    }
+  ],
+  "plugins": ["@typescript-eslint", "prettier"]
+}

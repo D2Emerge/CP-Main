@@ -1,0 +1,70 @@
+version: "3.8"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:9000
+      - WATCHPACK_POLLING=true
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/apps/web/.next
+    stdin_open: true
+    tty: true
+    depends_on:
+      - api
+    networks:
+      - code-project-network
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    ports:
+      - "9000:9000"
+    env_file:
+      - apps/api/.env.docker
+    environment:
+      - NODE_ENV=development
+      - PORT=9000
+    volumes:
+      - .:/usr/src/cp-main
+      - /usr/src/cp-main/node_modules
+    depends_on:
+      cp-main-db:
+        condition: service_healthy
+    networks:
+      - code-project-network
+
+  cp-main-db:
+    image: postgres:17
+    restart: always
+    ports:
+      - "5555:5432"
+    environment:
+      - POSTGRES_PASSWORD=1
+      - POSTGRES_DB=cp-main-db
+      - POSTGRES_USER=admin
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d cp-main-db"]
+      interval: 3s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - code-project-network
+
+volumes:
+  pgdata:
+
+networks:
+  code-project-network:
+    driver: bridge
