@@ -40,6 +40,8 @@ services:
     depends_on:
       cp-main-db:
         condition: service_healthy
+      cp-main-redis:
+        condition: service_healthy
     networks:
       - code-project-network
 
@@ -62,9 +64,23 @@ services:
     networks:
       - code-project-network
 
+  cp-main-redis:
+    image: redis:7-alpine
+    restart: always
+    ports:
+      - '6381:6379'
+    command: redis-server --appendonly yes --requirepass redispass
+    healthcheck:
+      test: ['CMD', 'redis-cli', '--raw', 'incr', 'ping']
+      interval: 3s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - redisdata:/data
 volumes:
   pgdata:
-
+  redisdata:
+  
 networks:
   code-project-network:
     driver: bridge
