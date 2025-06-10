@@ -199,3 +199,8 @@ pnpm-lock.yaml
 # Misc
 *.orig
 .vscode/settings.json
+
+
+# OpenAPI
+**/generated/
+**/generated

@@ -72,6 +72,16 @@ yarn docker:restart:web
 # Access service shells
 yarn docker:shell:api
 yarn docker:shell:web
+
+# codegen/openapi
+
+npm run codegen local ./generated       
+npm run codegen stage ./generated       
+npm run codegen prod ./generated       
+
+npm run codegen [env] [path_to_folder]
+# [env] - local/stage/prod 
+# [path_to_folder] - path where generated will be created
 ```
 
 ### Services

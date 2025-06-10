@@ -32,6 +32,18 @@ yarn build        # Build for production
 # Code Quality
 yarn lint         # Run ESLint
 yarn type-check   # Run TypeScript type checking
+
+
+# codegen/openapi
+
+npm run codegen local ./generated       
+npm run codegen stage ./generated       
+npm run codegen prod ./generated       
+
+npm run codegen [env] [path_to_folder]
+# [env] - local/stage/prod 
+# [path_to_folder] - path where generated will be created
+
 ```
 
 ## Project Structure

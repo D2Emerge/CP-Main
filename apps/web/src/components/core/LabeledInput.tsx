@@ -19,13 +19,13 @@ const LabeledInput = forwardRef<HTMLInputElement, LabeledInputProps>(
           ref={ref}
           value={value}
           className={[
-            'w-full rounded-md border px-3 py-2 focus:outline-none transition-all duration-200, bg-gray-50',
-            '[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_rgb(249_250_251)]',
-            '[&:-webkit-autofill:hover]:shadow-[inset_0_0_0px_1000px_rgb(249_250_251)]',
-            '[&:-webkit-autofill:focus]:shadow-[inset_0_0_0px_1000px_rgb(249_250_251)]',
+            'w-full rounded-md border px-3 py-2 focus:outline-none transition-all duration-200, bg-custom-white',
+            '[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_white]',
+            '[&:-webkit-autofill:hover]:shadow-[inset_0_0_0px_1000px_white]',
+            '[&:-webkit-autofill:focus]:shadow-[inset_0_0_0px_1000px_white]',
             error
-              ? 'border-red-500 focus:ring-2 focus:ring-red-500'
-              : 'border-gray-300 focus:ring-2 focus:ring-blue-500',
+              ? 'border-red-500 focus:ring-0 focus:ring-red-500'
+              : 'border-gray-300 focus:ring-0 focus:ring-custom-stroke',
           ]
             .filter(Boolean)
             .join(' ')}
@@ -43,8 +43,8 @@ const LabeledInput = forwardRef<HTMLInputElement, LabeledInputProps>(
             className={[
               'absolute left-3 transition-all duration-200 pointer-events-none font-medium',
               shouldFloat
-                ? 'left-2 text-xs -translate-y-2 bg-gray-50 px-1'
-                : 'top-2.5 left-3 text-sm',
+                ? 'left-2 text-xs bg-custom-white -translate-y-2  px-1 text-custom-txt-secondary'
+                : 'top-2.5 left-3 text-sm text-custom-txt-secondary',
               error
                 ? 'text-red-500'
                 : shouldFloat

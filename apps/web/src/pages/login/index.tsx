@@ -1,8 +1,8 @@
 import {useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 
-import {LabeledInput} from '@components/ui/labeled-input';
 import {zodResolver} from '@hookform/resolvers/zod';
+import {LabeledInput} from '@src/components/core/LabeledInput';
 import {useMutation} from '@tanstack/react-query';
 import {z} from 'zod';
 
