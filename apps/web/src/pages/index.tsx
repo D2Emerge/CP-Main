@@ -1,20 +1,31 @@
-import Link from 'next/link';
+import React, {useState} from 'react';
 
-export default function HomePage() {
+import {LoginModal} from '@src/components/ui/LoginModal';
+
+export default function Home() {
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold text-center mb-8 text-gray-900">
-          Code Project Base
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="text-center">
+        <h1 className="text-3xl font-bold text-gray-900 mb-8">
+          Welcome to Code Project
         </h1>
-        <div className="flex justify-center space-x-4">
-          <Link href="/login" className="text-blue-500 underline">
-            Login
-          </Link>
-          <Link href="/logout" className="text-blue-500 underline">
-            Logout
-          </Link>
-        </div>
+
+        <button
+          onClick={() => setIsLoginModalOpen(true)}
+          className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+          Open Login Modal
+        </button>
+
+        <LoginModal
+          isOpen={isLoginModalOpen}
+          onClose={() => setIsLoginModalOpen(false)}
+          onSwitchToSignup={() => {
+            setIsLoginModalOpen(false);
+            console.log('Switch to signup');
+          }}
+        />
       </div>
     </div>
   );
