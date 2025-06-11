@@ -7,7 +7,8 @@ import {LogoWithText} from './core/LogoWithText';
 
 export function Layout({children}: {children: React.ReactNode}) {
   return (
-    <div className={`min-h-screen bg-gray-50 font-nunito ${nunito.variable}`}>
+    <div
+      className={`min-h-screen bg-gray-50 font-nunito ${nunito.variable} flex flex-col`}>
       <div className="text-white text-sm py-2 px-4 text-center">
         <span className="text-custom-dark">
           Trust Or Verify? - The Risks Lurking in AI-Generated Code | LIVE
@@ -21,12 +22,16 @@ export function Layout({children}: {children: React.ReactNode}) {
       <header className="bg-custom-main-yellow shadow-sm h-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
           <div className="flex items-center justify-between h-full">
-            <LogoWithText />
+            <Link href="/">
+              <LogoWithText />
+            </Link>
 
             <div className="flex items-center">
-              <button className="border border-custom-dark px-5 py-3 rounded-full rounded-2xl">
+              <Link
+                href="/login"
+                className="border border-custom-dark px-5 py-3 rounded-full rounded-2xl">
                 <p> Sign in</p>
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -82,13 +87,13 @@ export function Layout({children}: {children: React.ReactNode}) {
         </div>
       </nav>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1">
         <div className="flex gap-6">
           <main className="flex-1">{children}</main>
         </div>
       </div>
 
-      <footer className="bg-gray-900 text-white mt-12">
+      <footer className="bg-gray-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex items-center justify-center mb-8">
             <LogoWithText
