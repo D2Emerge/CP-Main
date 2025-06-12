@@ -1,4 +1,4 @@
-import React, {forwardRef, useState} from 'react';
+import React, {forwardRef, useEffect, useState} from 'react';
 import {FieldError} from 'react-hook-form';
 
 interface LabeledInputProps
@@ -10,7 +10,23 @@ interface LabeledInputProps
 const LabeledInput = forwardRef<HTMLInputElement, LabeledInputProps>(
   ({label, error, value, ...props}, ref) => {
     const [isFocused, setIsFocused] = useState(false);
-    const shouldFloat = isFocused || (value && value.toString().length > 0);
+    const [actualValue, setActualValue] = useState('');
+
+    useEffect(() => {
+      if (ref && typeof ref === 'object' && ref.current) {
+        setActualValue(ref.current.value);
+      }
+    }, [value, ref]);
+
+    const shouldFloat =
+      isFocused ||
+      (value !== undefined && value !== null && value !== '') ||
+      (actualValue !== undefined &&
+        actualValue !== null &&
+        actualValue !== '') ||
+      (props.defaultValue !== undefined &&
+        props.defaultValue !== null &&
+        props.defaultValue !== '');
 
     return (
       <div className="relative">
@@ -23,6 +39,7 @@ const LabeledInput = forwardRef<HTMLInputElement, LabeledInputProps>(
             '[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_white]',
             '[&:-webkit-autofill:hover]:shadow-[inset_0_0_0px_1000px_white]',
             '[&:-webkit-autofill:focus]:shadow-[inset_0_0_0px_1000px_white]',
+            'floating-label input:not(:placeholder-shown) ~ label, floating-label input:-webkit-autofill ~ label, floating-label input:autofill ~ label',
             error
               ? 'border-red-500 focus:ring-0 focus:ring-red-500'
               : 'border-gray-300 focus:ring-0 focus:ring-custom-stroke',
@@ -35,8 +52,15 @@ const LabeledInput = forwardRef<HTMLInputElement, LabeledInputProps>(
           }}
           onBlur={e => {
             setIsFocused(false);
+
+            setActualValue(e.target.value);
             props.onBlur?.(e);
           }}
+          onChange={e => {
+            setActualValue(e.target.value);
+            props.onChange?.(e);
+          }}
+          autoComplete="off"
         />
         {label && (
           <label

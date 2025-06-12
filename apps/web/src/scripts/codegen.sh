@@ -1,7 +1,7 @@
 set -e
 
 ENVIRONMENT=${1:-"local"}
-OUTPUT_PATH=${2:-"./frontend-types"}
+OUTPUT_PATH=${2:-"./generated"}
 
 
 if [ "$ENVIRONMENT" = "local" ]; then

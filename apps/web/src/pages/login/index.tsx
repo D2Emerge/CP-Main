@@ -1,10 +1,17 @@
-import {useState} from 'react';
+'use client';
+import React, {useEffect, useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 
 import {zodResolver} from '@hookform/resolvers/zod';
+import {GithubLogo} from '@src/assets/icons/GithubLogo';
+import {GoogleLogo} from '@src/assets/icons/GoogleLogo';
+import {MicrosoftLogo} from '@src/assets/icons/MicrosoftLogo';
 import {LabeledInput} from '@src/components/core/LabeledInput';
-import {useMutation} from '@tanstack/react-query';
+import {OAuthService} from '@src/generated';
+import {Eye, EyeOff} from 'lucide-react';
 import {z} from 'zod';
+
+import {useOAuthParams} from './useOAuthParams';
 
 const loginSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -13,127 +20,141 @@ const loginSchema = z.object({
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
-const loginUserApi = async (data: LoginFormData) => {
-  // TODO: value is hardcoded for usage with selfmade proxy, need to be replaced with openapi
-  const response = await fetch('/api/v1/auth/login', {
-    method: 'POST',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  });
+interface LoginPageProps {
+  onSwitchToSignup?: () => void;
+}
 
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}));
-    const errorMessage =
-      errorData.message || `Login failed: ${response.status}`;
-    throw new Error(errorMessage);
-  }
+export default function LoginPage({onSwitchToSignup}: LoginPageProps) {
+  const {clientId, redirectUri, responseType, scope, state} = useOAuthParams();
+  const [showPassword, setShowPassword] = useState(false);
 
-  return response.json();
-};
-
-const getInfoApi = async () => {
-  const response = await fetch('/api/v1/auth/me', {
-    credentials: 'include',
-  });
-
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}));
-    const errorMessage =
-      errorData.message || `Get info failed: ${response.status}`;
-    throw new Error(errorMessage);
-  }
-
-  return response.json();
-};
-
-export default function LoginPage() {
-  const {handleSubmit, control} = useForm<LoginFormData>({
+  const {
+    handleSubmit,
+    control,
+    formState: {isSubmitting},
+    reset,
+  } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
   });
 
-  const [info, setInfo] = useState<any>(null);
-
-  const {
-    mutate: loginUser,
-    isPending: loading,
-    isError,
-    error,
-    isSuccess,
-    reset,
-  } = useMutation({
-    mutationFn: loginUserApi,
-    onSuccess: res => {
-      console.log('Login successful:', res);
-    },
-    onError: (err: Error) => {
-      console.error('Login error:', err);
-    },
-  });
-
-  const onSubmit = (data: LoginFormData) => {
-    console.log(data);
-    loginUser(data);
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      if (redirectUri && state && clientId) {
+        const response = await OAuthService.oauthControllerLogin({
+          requestBody: {
+            email: data.email,
+            username: data.email.split('@')[0],
+            password: data.password,
+            redirect_uri: redirectUri,
+            state: state,
+            client_id: clientId,
+          },
+        });
+        window.location.href = response;
+      }
+      // TODO: handle normal login
+      return;
+      reset();
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
   };
 
-  const onGetInfo = () => {
-    getInfoApi().then(res => {
-      setInfo(res);
-    });
+  const handleSocialLogin = (provider: string) => {
+    const returnUrl =
+      redirectUri?.split('/').slice(0, 3).join('/') || process.env.BASE_URL;
+
+    window.location.href = `${process.env.IDP_URL}/v1/auth/google?returnUrl=${returnUrl}`;
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
-      <div className="max-w-md mx-auto">
-        <h1 className="text-4xl font-bold text-center mb-8 text-gray-900">
-          Code Project. Login page
-        </h1>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <div>
-            <Controller
-              name="email"
-              control={control}
-              render={({field, fieldState}) => (
-                <LabeledInput
-                  label="Email"
-                  type="email"
-                  error={fieldState.error}
-                  {...field}
-                />
-              )}
-            />
-          </div>
-          <div>
-            <Controller
-              name="password"
-              control={control}
-              render={({field, fieldState}) => (
-                <LabeledInput
-                  label="Password"
-                  type="password"
-                  error={fieldState.error}
-                  {...field}
-                />
-              )}
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-            Sign In
-          </button>
-          {isError && <p className="text-red-500">{error.message}</p>}
-          {isSuccess && <p className="text-green-500">Login successful</p>}
-          {loading && <p className="text-gray-500">Loading...</p>}
-        </form>
+    <div className="text-center">
+      <h1 className="text-3xl font-bold text-gray-900 mb-6">Log In</h1>
+
+      <p className="text-gray-600 mb-8">
+        Don&apos;t have an account?{' '}
         <button
-          onClick={() => onGetInfo()}
-          className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-          Get info
+          onClick={onSwitchToSignup}
+          className="text-orange-500 hover:text-orange-600 font-medium">
+          Sign up
         </button>
-        {info && <p>{JSON.stringify(info)}</p>}
+      </p>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <div>
+          <Controller
+            name="email"
+            control={control}
+            render={({field, fieldState}) => (
+              <LabeledInput
+                label="Email address"
+                type="email"
+                error={fieldState.error}
+                {...field}
+              />
+            )}
+          />
+        </div>
+
+        <div className="relative">
+          <Controller
+            name="password"
+            control={control}
+            render={({field, fieldState}) => (
+              <LabeledInput
+                label="Password"
+                type={showPassword ? 'text' : 'password'}
+                error={fieldState.error}
+                {...field}
+              />
+            )}
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 z-10">
+            {showPassword ? (
+              <EyeOff className="w-5 h-5" />
+            ) : (
+              <Eye className="w-5 h-5" />
+            )}
+          </button>
+        </div>
+
+        <div className="text-left">
+          <button
+            type="button"
+            className="text-gray-900 hover:text-gray-700 text-sm underline">
+            Forget password?
+          </button>
+        </div>
+
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full bg-black text-white py-3 px-4 rounded-md font-medium hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+          {isSubmitting ? 'Logging in...' : 'Log In'}
+        </button>
+      </form>
+
+      <div className="mt-8 flex justify-center space-x-4">
+        <button
+          onClick={() => handleSocialLogin('google')}
+          className="w-12 h-12 border border-gray-300 rounded-lg flex items-center justify-center hover:bg-gray-50 transition-colors">
+          <GoogleLogo />
+        </button>
+
+        <button
+          onClick={() => handleSocialLogin('github')}
+          className="w-12 h-12 border border-gray-300 rounded-lg flex items-center justify-center hover:bg-gray-50 transition-colors">
+          <GithubLogo />
+        </button>
+
+        <button
+          onClick={() => handleSocialLogin('microsoft')}
+          className="w-12 h-12 border border-gray-300 rounded-lg flex items-center justify-center hover:bg-gray-50 transition-colors">
+          <MicrosoftLogo />
+        </button>
       </div>
     </div>
   );
