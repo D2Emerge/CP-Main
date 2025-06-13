@@ -62,9 +62,10 @@ export default function LoginPage({onSwitchToSignup}: LoginPageProps) {
 
   const handleSocialLogin = (provider: string) => {
     const returnUrl =
-      redirectUri?.split('/').slice(0, 3).join('/') || process.env.BASE_URL;
+      redirectUri?.split('/').slice(0, 3).join('/') ||
+      process.env.NEXT_PUBLIC_BASE_URL;
 
-    window.location.href = `${process.env.IDP_URL}/v1/auth/google?returnUrl=${returnUrl}`;
+    window.location.href = `${process.env.NEXT_PUBLIC_IDP_URL}/v1/auth/${provider}?returnUrl=${returnUrl}`;
   };
 
   return (
