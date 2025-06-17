@@ -10,16 +10,16 @@ export function Layout({children}: {children: React.ReactNode}) {
     <div
       className={`min-h-screen bg-gray-50 font-nunito ${nunito.variable} flex flex-col`}>
       <div className="text-white text-sm py-2 px-4 text-center">
-        <span className="text-custom-dark">
+        <span className="text-dark">
           Trust Or Verify? - The Risks Lurking in AI-Generated Code | LIVE
           Webinar
         </span>
-        <button className="ml-4 bg-custom-additional px-3 py-1 rounded text-xs font-medium">
+        <button className="ml-4 bg-additional px-3 py-1 rounded text-xs font-medium">
           Register Now
         </button>
       </div>
 
-      <header className="bg-custom-main-yellow shadow-sm h-20">
+      <header className="bg-main-yellow shadow-sm h-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
           <div className="flex items-center justify-between h-full">
             <Link href="/">
@@ -29,7 +29,7 @@ export function Layout({children}: {children: React.ReactNode}) {
             <div className="flex items-center">
               <Link
                 href="/login"
-                className="border border-custom-dark px-5 py-3 rounded-full rounded-2xl">
+                className="border border-dark px-5 py-3 rounded-full rounded-2xl">
                 <p> Sign in</p>
               </Link>
             </div>
@@ -43,37 +43,37 @@ export function Layout({children}: {children: React.ReactNode}) {
             <div className="flex space-x-8">
               <Link
                 href="/"
-                className="text-custom-txt-secondary px-3 py-2 text-sm font-medium">
+                className="text-txt-secondary px-3 py-2 text-sm font-medium">
                 Home
               </Link>
               <Link
                 href="/articles"
-                className="text-custom-txt-secondary hover:text-gray-900 px-3 py-2 text-sm font-medium">
+                className="text-txt-secondary hover:text-gray-900 px-3 py-2 text-sm font-medium">
                 Articles
               </Link>
               <Link
                 href="/quick-answers"
-                className="text-custom-txt-secondary hover:text-gray-900 px-3 py-2 text-sm font-medium">
+                className="text-txt-secondary hover:text-gray-900 px-3 py-2 text-sm font-medium">
                 Quick answers
               </Link>
               <Link
                 href="/discussions"
-                className="text-custom-txt-secondary hover:text-gray-900 px-3 py-2 text-sm font-medium">
+                className="text-txt-secondary hover:text-gray-900 px-3 py-2 text-sm font-medium">
                 Discussions
               </Link>
               <Link
                 href="/newsletter"
-                className="text-custom-txt-secondary hover:text-gray-900 px-3 py-2 text-sm font-medium">
+                className="text-txt-secondary hover:text-gray-900 px-3 py-2 text-sm font-medium">
                 Newsletter
               </Link>
               <Link
                 href="/community"
-                className="text-custom-txt-secondary hover:text-gray-900 px-3 py-2 text-sm font-medium">
+                className="text-txt-secondary hover:text-gray-900 px-3 py-2 text-sm font-medium">
                 Community
               </Link>
               <Link
                 href="/faq"
-                className="text-custom-txt-secondary hover:text-gray-900 px-3 py-2 text-sm font-medium">
+                className="text-txt-secondary hover:text-gray-900 px-3 py-2 text-sm font-medium">
                 FAQ
               </Link>
             </div>
@@ -97,8 +97,8 @@ export function Layout({children}: {children: React.ReactNode}) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex items-center justify-center mb-8">
             <LogoWithText
-              mainTextClassName="text-custom-white"
-              subTextClassName="text-custom-white"
+              mainTextClassName="text-white"
+              subTextClassName="text-white"
               logoClassName=""
               width={45}
               height={45}
@@ -108,32 +108,28 @@ export function Layout({children}: {children: React.ReactNode}) {
           <div className="flex justify-center space-x-6 mb-6">
             <Link
               href="/advertise"
-              className="text-custom-white hover:text-white text-sm">
+              className="text-white hover:text-white text-sm">
               Advertise
             </Link>
-            <Link
-              href="/about"
-              className="text-custom-white hover:text-white text-sm">
+            <Link href="/about" className="text-white hover:text-white text-sm">
               About Us
             </Link>
             <Link
               href="/privacy"
-              className="text-custom-white hover:text-white text-sm">
+              className="text-white hover:text-white text-sm">
               Privacy
             </Link>
             <Link
               href="/cookies"
-              className="text-custom-white hover:text-white text-sm">
+              className="text-white hover:text-white text-sm">
               Cookies
             </Link>
-            <Link
-              href="/terms"
-              className="text-custom-white hover:text-white text-sm">
+            <Link href="/terms" className="text-white hover:text-white text-sm">
               Terms Of Use
             </Link>
           </div>
 
-          <div className="text-center text-custom-txt-secondary text-xs">
+          <div className="text-center text-txt-secondary text-xs">
             Copyright 1999-{new Date().getFullYear()} © CodeProject. All Rights
             Reserved.
           </div>

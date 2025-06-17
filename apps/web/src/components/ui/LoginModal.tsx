@@ -2,12 +2,12 @@ import React, {useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 
 import {zodResolver} from '@hookform/resolvers/zod';
+import {EyeClosed, EyeOpen} from '@src/assets/icons';
 import {GithubLogo} from '@src/assets/icons/GithubLogo';
 import {GoogleLogo} from '@src/assets/icons/GoogleLogo';
 import {MicrosoftLogo} from '@src/assets/icons/MicrosoftLogo';
 import {LabeledInput} from '@src/components/core/LabeledInput';
 import {Modal} from '@src/components/core/Modal';
-import {Eye, EyeOff} from 'lucide-react';
 import {z} from 'zod';
 
 const loginSchema = z.object({
@@ -107,17 +107,15 @@ export function LoginModal({
               onClick={() => setShowPassword(!showPassword)}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 z-10">
               {showPassword ? (
-                <EyeOff className="w-5 h-5" />
+                <EyeClosed className="w-5 h-5" />
               ) : (
-                <Eye className="w-5 h-5" />
+                <EyeOpen className="w-5 h-5" />
               )}
             </button>
           </div>
 
           <div className="text-left">
-            <button
-              type="button"
-              className="text-gray-900 hover:text-gray-700 text-sm underline">
+            <button type="button" className="text-dark text-sm underline">
               Forget password?
             </button>
           </div>
@@ -125,7 +123,7 @@ export function LoginModal({
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-black text-white py-3 px-4 rounded-md font-medium hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+            className="w-full bg-black text-white py-3 px-4 rounded-xl font-medium hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
             {isSubmitting ? 'Logging in...' : 'Log In'}
           </button>
         </form>
