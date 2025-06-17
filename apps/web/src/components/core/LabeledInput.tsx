@@ -1,14 +1,17 @@
 import React, {forwardRef, useEffect, useState} from 'react';
 import {FieldError} from 'react-hook-form';
 
+import {InfoCircle} from '@src/assets/icons/InfoCircle';
+
 interface LabeledInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
+  placeholder?: string;
   error: FieldError | undefined;
 }
 
 const LabeledInput = forwardRef<HTMLInputElement, LabeledInputProps>(
-  ({label, error, value, ...props}, ref) => {
+  ({label, error, value, placeholder, ...props}, ref) => {
     const [isFocused, setIsFocused] = useState(false);
     const [actualValue, setActualValue] = useState('');
 
@@ -34,15 +37,16 @@ const LabeledInput = forwardRef<HTMLInputElement, LabeledInputProps>(
           {...props}
           ref={ref}
           value={value}
+          placeholder={placeholder}
           className={[
-            'w-full rounded-md border px-3 py-2 focus:outline-none transition-all duration-200, bg-custom-white',
+            'w-full rounded-md border px-3 py-2 focus:outline-none transition-all duration-200, bg-white',
             '[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_white]',
             '[&:-webkit-autofill:hover]:shadow-[inset_0_0_0px_1000px_white]',
             '[&:-webkit-autofill:focus]:shadow-[inset_0_0_0px_1000px_white]',
             'floating-label input:not(:placeholder-shown) ~ label, floating-label input:-webkit-autofill ~ label, floating-label input:autofill ~ label',
             error
-              ? 'border-red-500 focus:ring-0 focus:ring-red-500'
-              : 'border-gray-300 focus:ring-0 focus:ring-custom-stroke',
+              ? 'border-danger focus:ring-0 focus:ring-danger'
+              : 'border-gray-300 focus:ring-0 focus:ring-stroke focus:border-dark',
           ]
             .filter(Boolean)
             .join(' ')}
@@ -67,20 +71,30 @@ const LabeledInput = forwardRef<HTMLInputElement, LabeledInputProps>(
             className={[
               'absolute left-3 transition-all duration-200 pointer-events-none font-medium',
               shouldFloat
-                ? 'left-2 text-xs bg-custom-white -translate-y-2  px-1 text-custom-txt-secondary'
-                : 'top-2.5 left-3 text-sm text-custom-txt-secondary',
+                ? 'left-2 text-xs bg-white -translate-y-1.5 -translate-x-1 px-1 text-txt-secondary'
+                : 'top-3 left-3 text-sm text-txt-secondary',
               error
-                ? 'text-red-500'
+                ? 'text-danger'
                 : shouldFloat
-                  ? 'text-blue-500'
-                  : 'text-gray-500',
+                  ? 'text-txt-secondary'
+                  : 'text-txt-secondary',
             ]
               .filter(Boolean)
               .join(' ')}>
             {label}
           </label>
         )}
-        {error && <p className="text-red-500 text-sm mt-1">{error.message}</p>}
+        {error && (
+          <div className="flex items-center gap-2">
+            <InfoCircle
+              className="text-danger absolute top-2 right-1 -translate-x-1 translate-y-0.5"
+              width={21.5}
+              height={21.5}
+              fill="red"
+            />
+            <p className="text-danger text-sm mt-1">{error.message}</p>
+          </div>
+        )}
       </div>
     );
   }
