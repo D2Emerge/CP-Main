@@ -8,10 +8,11 @@ import {GoogleLogo} from '@src/assets/icons/GoogleLogo';
 import {MicrosoftLogo} from '@src/assets/icons/MicrosoftLogo';
 import {LabeledInput} from '@src/components/core/LabeledInput';
 import {OAuthService} from '@src/generated';
-import {Eye, EyeOff} from 'lucide-react';
+
 import {z} from 'zod';
 
 import {useOAuthParams} from './useOAuthParams';
+import {EyeClosed, EyeOpen} from '@src/assets/icons';
 
 const loginSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -69,7 +70,7 @@ export default function LoginPage({onSwitchToSignup}: LoginPageProps) {
   };
 
   return (
-    <div className="text-center">
+    <div className="text-center bg-white p-10">
       <h1 className="text-3xl font-bold text-gray-900 mb-6">Log In</h1>
 
       <p className="text-gray-600 mb-8">
@@ -115,9 +116,9 @@ export default function LoginPage({onSwitchToSignup}: LoginPageProps) {
             onClick={() => setShowPassword(!showPassword)}
             className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 z-10">
             {showPassword ? (
-              <EyeOff className="w-5 h-5" />
+              <EyeClosed className="w-5 h-5" />
             ) : (
-              <Eye className="w-5 h-5" />
+              <EyeOpen className="w-5 h-5" />
             )}
           </button>
         </div>

@@ -129,13 +129,19 @@ export default function Home() {
                   value={false}
                   onChange={() => {}}
                   label="Disabled"
-                  disabled
+                  disabled={!isChecked}
                 />
                 <Checkbox
                   value={false}
                   onChange={() => {}}
                   label="Highlighted"
                   highlighted
+                />
+                <Checkbox
+                  value={false}
+                  onChange={() => {}}
+                  label="Rounded"
+                  rounded
                 />
                 <form>
                   <Checkbox name="formCheckbox" label="React Hook Form" />

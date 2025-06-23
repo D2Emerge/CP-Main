@@ -11,8 +11,8 @@ interface LogoWithTextProps {
 export const LogoWithText = ({
   width = 68,
   height = 94,
-  mainTextClassName = 'text-custom-dark',
-  subTextClassName = 'text-custom-txt-secondary',
+  mainTextClassName = 'text-dark',
+  subTextClassName = 'text-txt-secondary',
   logoClassName = '-mt-5',
 }: LogoWithTextProps) => {
   return (

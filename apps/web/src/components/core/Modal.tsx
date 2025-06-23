@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 
-import {X} from 'lucide-react';
+import {Cross} from '@src/assets/icons/Cross';
 
 interface ModalProps {
   isOpen: boolean;
@@ -53,7 +53,7 @@ export function Modal({
             <button
               onClick={onClose}
               className="text-gray-400 hover:text-gray-600 transition-colors">
-              <X className="w-5 h-5" />
+              <Cross className="w-5 h-5" />
             </button>
           </div>
         )}
