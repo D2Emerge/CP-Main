@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
-
 export const demoArticles = [
     {
         "ArticleId": "1",
