@@ -13,6 +13,17 @@ module.exports = {
         h1: ['36px', {lineHeight: '44px', fontWeight: '700'}],
         h2: ['28px', {lineHeight: '36px', fontWeight: '700'}],
         h3: ['24px', {lineHeight: '28px', fontWeight: '700'}],
+        'subtitle-semibold': ['20', {lineHeight: '24px', fontWeight: '600'}],
+        subtitle: ['20px', {lineHeight: '24px', fontWeight: '400'}],
+        'subtitle-italic': [
+          '20px',
+          {lineHeight: '24px', fontWeight: '400', fontStyle: 'italic'},
+        ],
+        'body-bold': ['18px', {lineHeight: '24px', fontWeight: '700'}],
+        'body-semibold-aa': ['18px', {lineHeight: '24px', fontWeight: '600'}],
+        'body-semibold': ['18px', {lineHeight: '24px', fontWeight: '600'}],
+        'body-medium': ['18px', {lineHeight: '24px', fontWeight: '500'}],
+        body: ['18px', {lineHeight: '24px', fontWeight: '400'}],
         'subtitle-semibold': ['18px', {lineHeight: '28px', fontWeight: '600'}],
         subtitle: ['18px', {lineHeight: '24px', fontWeight: '400'}],
         'subtitle-italic': [
@@ -24,14 +35,6 @@ module.exports = {
         'body-semibold': ['16px', {lineHeight: '24px', fontWeight: '600'}],
         'body-medium': ['16px', {lineHeight: '24px', fontWeight: '500'}],
         body: ['16px', {lineHeight: '24px', fontWeight: '400'}],
-        'footnote-semibold': ['14px', {lineHeight: '20px', fontWeight: '600'}],
-        footnote: ['14px', {lineHeight: '20px', fontWeight: '400'}],
-        'caption-bold': ['12px', {lineHeight: '16px', fontWeight: '700'}],
-        'caption-semibold': ['12px', {lineHeight: '16px', fontWeight: '600'}],
-        caption: ['12px', {lineHeight: '16px', fontWeight: '400'}],
-        'extra-bold': ['10px', {lineHeight: '14px', fontWeight: '700'}],
-        extra: ['10px', {lineHeight: '14px', fontWeight: '400'}],
-      },
 
       colors: {
         white: '#FFFFFF',
@@ -52,6 +55,8 @@ module.exports = {
         info: '#3256D8',
         danger: '#E92B2B',
         'light-orange': '#FEF4DC',
+        green: '#00983D',
+        'burnt-sienna': '#A64D2F',
         brand: {
           primary: '#F9C74F',
           'primary-hover': '#F0B62B',

@@ -46,7 +46,9 @@ npm run codegen [env] [path_to_folder]
 
 ```
 
-## Project Structure
+## Project Structure and details
+
+### Structure
 
 ```
 src/
@@ -58,3 +60,9 @@ src/
 ├── modules/      # Zustand modules
 └── styles/       # Global styles and Tailwind configurations
 ```
+
+### Details
+**Note**: Make sure not to duplicate data between state managers
+- State managers used: 
+    - Zustand  - main state manager
+    - @tanstack/react-query - used for making and caching requests

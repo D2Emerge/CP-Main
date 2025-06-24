@@ -35,6 +35,9 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "lucide-react": "^0.513.0"
+    "@types/react-syntax-highlighter": "^15.5.13",
+    "html-react-parser": "^5.2.5",
+    "lucide-react": "^0.513.0",
+    "react-syntax-highlighter": "^15.6.1"
   }
 }
