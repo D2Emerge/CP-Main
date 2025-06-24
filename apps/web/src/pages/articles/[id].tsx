@@ -2,6 +2,7 @@ import React from 'react';
 import {Prism, SyntaxHighlighterProps} from 'react-syntax-highlighter';
 import {useRouter} from 'next/router';
 
+import {ArrowLeft, ArrowRight} from '@src/assets/icons';
 import {Copy} from '@src/assets/icons/Copy';
 import {demoArticles} from '@src/constants/demoArticles';
 import {screenshotStyle} from '@src/styles/screenshotSyntaxStyle';
@@ -42,15 +43,9 @@ export default function ArticlePage() {
           const codeString = codeNode.data;
 
           return (
-            <div
-              className="bg-custom-grey rounded-md p-4 border-radius-lg"
-              style={{
-                borderRadius: '16px',
-              }}>
-              <div className="flex justify-between items-center mb-2 border-b-2 border-custom-stroke-border pb-2">
-                <p className="text-lg text-custom-dark ">
-                  {language.toUpperCase()}
-                </p>
+            <div className="bg-grey rounded-2xl p-4">
+              <div className="flex justify-between items-center mb-2 border-b-2 border-stroke-border pb-2">
+                <p className="text-lg text-dark">{language.toUpperCase()}</p>
                 <button onClick={() => onCopyCode(codeString)}>
                   <Copy className="cursor-pointer" color="#7B7875" />
                 </button>
@@ -73,22 +68,44 @@ export default function ArticlePage() {
         <p>
           ArticlePage {id}/{articles.length}
         </p>
-        <div className="flex gap-2">
-          <button onClick={() => router.push(`/articles/${Number(id) - 1}`)}>
+        <div className="flex gap-5">
+          <button
+            onClick={() => router.push(`/articles/${Number(id) - 1}`)}
+            className="flex items-center gap-2">
+            <ArrowLeft width={16} height={16} />
             Go to Article {Number(id) - 1}
           </button>
-          <button onClick={() => router.push(`/articles/${Number(id) + 1}`)}>
+          <button
+            onClick={() => router.push(`/articles/${Number(id) + 1}`)}
+            className="flex items-center gap-2">
             Go to Article {Number(id) + 1}
+            <ArrowRight width={16} height={16} />
           </button>
         </div>
       </div>
       <div
-        className="text-gray-800 leading-relaxed
-           [&>h1]:text-3xl [&>h1]:font-bold [&>h1]:mb-4
-           [&>h2]:text-2xl [&>h2]:font-semibold [&>h2]:mb-3 [&>h2]:mt-6
-           [&>p]:my-4 [&>p]:text-justify
-           [&>a]:text-blue-600 [&>a]:underline
-           [&>img]:w-full [&>img]:h-auto [&>img]:my-4 [&>img]:block [&>img]:mx-auto [&>img]:rounded-md [&>img]:shadow-md">
+        className="text-dark leading-relaxed font-nunito text-body-medium
+     [&_h1]:text-h1
+     [&_h2]:text-h2
+     [&_h3]:text-h3
+     [&_h4]:text-subtitle-semibold
+     [&_h5]:text-body-bold
+     [&_h6]:text-body-semibold
+     [&_p]:text-body [&_p]:my-4 [&_p]:text-justify
+     [&_a]:text-info [&_a]:underline
+     [&_ul]:my-4 [&_ul]:pl-6
+     [&_ol]:my-4 [&_ol]:pl-6
+     [&_li]:mb-2 [&_li]:text-body
+     [&_blockquote]:border-l-4 [&_blockquote]:border-grey [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:my-4 [&_blockquote]:text-body
+     [&_table]:w-full [&_table]:border-collapse [&_table]:my-4
+     [&_th]:border [&_th]:border-grey [&_th]:p-2 [&_th]:bg-light-grey [&_th]:text-body-semibold
+     [&_td]:border [&_td]:border-grey [&_td]:p-2 [&_td]:text-body
+     [&_strong]:font-bold
+     [&_em]:italic
+     [&_mark]:bg-light-orange
+     [&_code]:px-1 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-footnote [&_code]:font-mono
+     [&_hr]:my-6 [&_hr]:border-grey
+     [&_img]:w-full [&_img]:h-auto [&_img]:my-4 [&_img]:block [&_img]:mx-auto [&_img]:rounded-md [&_img]:shadow-md">
         {parse(currentArticle.Content, options)}
       </div>
     </div>

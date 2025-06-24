@@ -1,6 +1,6 @@
 export const screenshotStyle = {
   'pre[class*="language-"]': {
-    color: '#000000',
+    color: '#0E0800',
     background: '#EBEBEB',
     fontSize: '14px',
     padding: '5px',
@@ -10,37 +10,34 @@ export const screenshotStyle = {
     paddingLeft: '30px',
   },
   comment: {
-    color: '#6a737d',
+    color: '#7B7875',
     fontStyle: 'italic',
   },
   property: {
-    color: '#28a745', // Green
+    color: '#00983D',
   },
   string: {
-    color: '#28a745', // Green
+    color: '#E99714',
   },
   number: {
-    color: '#d19a66', // Brownish-orange
+    color: '#d19a66',
   },
   'attr-value': {
-    // For values like hex codes in CSS
     color: '#d19a66',
   },
   keyword: {
-    // For `white` in `color: white;`
-    color: '#000000',
+    color: '#00983D',
   },
   selector: {
-    // For `pre` in `pre { ... }`
-    color: '#000000',
+    color: '#A64D2F',
   },
   punctuation: {
     color: '#000000',
   },
   operator: {
-    color: '#000000',
+    color: '#3256D8',
   },
   function: {
-    color: '#000000',
+    color: '#A64D2F',
   },
 };
