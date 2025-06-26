@@ -4,12 +4,12 @@
   "requiresCompatibilities": ["FARGATE"],
   "cpu": "512",
   "memory": "1024",
-  "executionRoleArn": "arn:aws:iam::YOUR_ACCOUNT_ID:role/ecsTaskExecutionRole",
-  "taskRoleArn": "arn:aws:iam::YOUR_ACCOUNT_ID:role/ecsTaskRole",
+  "executionRoleArn": "arn:aws:iam::343218197585:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::343218197585:role/ecsTaskRole",
   "containerDefinitions": [
     {
       "name": "cp-main-staging",
-      "image": "YOUR_ACCOUNT_ID.dkr.ecr.eu-north-1.amazonaws.com/cp-main-staging:latest",
+      "image": "343218197585.dkr.ecr.eu-north-1.amazonaws.com/cp-main-staging:latest",
       "essential": true,
       "portMappings": [
         {
@@ -33,12 +33,6 @@
         {
           "name": "PORT",
           "value": "3000"
-        }
-      ],
-      "secrets": [
-        {
-          "name": "DATABASE_URL",
-          "valueFrom": "arn:aws:ssm:eu-north-1:YOUR_ACCOUNT_ID:parameter/cp-main-staging/DATABASE_URL"
         }
       ],
       "healthCheck": {
