@@ -18,7 +18,7 @@ module.exports = {
     'out/',
     'node_modules/',
     'public/',
-    'src/api/generated/',
+    'src/generated/',
   ],
   parserOptions: {
     ecmaVersion: 2020,

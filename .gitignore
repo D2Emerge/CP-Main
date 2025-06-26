@@ -125,7 +125,6 @@ Thumbs.db
 *.db
 
 # Docker
-.dockerignore
 docker-compose.override.yml
 
 # Testing

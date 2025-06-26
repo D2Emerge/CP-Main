@@ -1,18 +1,17 @@
 'use client';
-import React, {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 
 import {zodResolver} from '@hookform/resolvers/zod';
+import {EyeClosed, EyeOpen} from '@src/assets/icons';
 import {GithubLogo} from '@src/assets/icons/GithubLogo';
 import {GoogleLogo} from '@src/assets/icons/GoogleLogo';
 import {MicrosoftLogo} from '@src/assets/icons/MicrosoftLogo';
 import {LabeledInput} from '@src/components/core/LabeledInput';
 import {OAuthService} from '@src/generated';
-
 import {z} from 'zod';
 
 import {useOAuthParams} from './useOAuthParams';
-import {EyeClosed, EyeOpen} from '@src/assets/icons';
 
 const loginSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
