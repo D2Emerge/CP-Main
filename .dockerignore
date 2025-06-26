@@ -1,40 +1,69 @@
+# .dockerignore for monorepo
 node_modules
 .git
 .gitignore
 README.md
-.env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 .next
-.nuxt
 dist
 build
 
-*
-!package*.json
+# Include necessary files
+!package.json
 !yarn.lock
-!pnpm-lock.yaml
-!tsconfig.json
-!turbo.json
-!apps/web
+!.yarnrc.yml
+!apps/web/
+!packages/shared/
 
-!apps/web/**
+# Include .yarn directory if it exists (for Yarn v4+)
+!.yarn/
+
+# Specifically include codegen script
+!apps/web/src/scripts/
+
+# Exclude build artifacts from included folders
 apps/web/node_modules
 apps/web/.next
 apps/web/.env*
 apps/web/dist
-apps/web/build
+packages/shared/node_modules
+packages/shared/dist
+packages/shared/.env*
 
+# Don't copy generated files (they'll be generated during build)
+apps/web/src/generated/
+
+# Documentation
 *.md
 docs/
 .vscode/
 .idea/
 
+# OS
 .DS_Store
 Thumbs.db
 
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Documentation
+*.md
+docs/
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
 logs
 *.log
 npm-debug.log*

@@ -1,8 +1,7 @@
 set -e
 
 ENVIRONMENT=${1:-"local"}
-OUTPUT_PATH=${2:-"./generated"}
-
+OUTPUT_PATH=${2:-"./src/generated"}
 
 if [ "$ENVIRONMENT" = "local" ]; then
   API_URL="http://localhost:8289/v1/api/json"
@@ -35,7 +34,7 @@ echo "✅ API is accessible"
 
 mkdir -p "$OUTPUT_PATH"
 
-echo "⚡ Generating TypeScript client..."
+echo "⚡️ Generating TypeScript client..."
 npx openapi-typescript-codegen \
   --input "$API_URL" \
   --output "$OUTPUT_PATH" \
@@ -49,7 +48,6 @@ npx openapi-typescript-codegen \
 
 
 echo "✅ Frontend types generated successfully!"
-echo "📦 Package created at: $OUTPUT_PATH"
 echo ""
 echo "🔧 To use in your frontend:"
 echo "1. Copy the generated folder to your frontend project"
@@ -57,4 +55,4 @@ echo "2. Install dependencies: cd $OUTPUT_PATH && npm install"
 echo "3. Import and use the generated types and services"
 echo ""
 echo "🚀 Example usage:"
-echo "import { UserService } from './path/to/generated';" 
+echo "import { UserService } from './path/to/generated';"

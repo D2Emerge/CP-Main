@@ -13,17 +13,24 @@ module.exports = {
         h1: ['36px', {lineHeight: '44px', fontWeight: '700'}],
         h2: ['28px', {lineHeight: '36px', fontWeight: '700'}],
         h3: ['24px', {lineHeight: '28px', fontWeight: '700'}],
-        'subtitle-semibold': ['20', {lineHeight: '24px', fontWeight: '600'}],
-        subtitle: ['20px', {lineHeight: '24px', fontWeight: '400'}],
-        'subtitle-italic': [
+        'subtitle-semibold-lg': [
+          '20px',
+          {lineHeight: '24px', fontWeight: '600'},
+        ],
+        'subtitle-lg': ['20px', {lineHeight: '24px', fontWeight: '400'}],
+        'subtitle-italic-lg': [
           '20px',
           {lineHeight: '24px', fontWeight: '400', fontStyle: 'italic'},
         ],
-        'body-bold': ['18px', {lineHeight: '24px', fontWeight: '700'}],
-        'body-semibold-aa': ['18px', {lineHeight: '24px', fontWeight: '600'}],
-        'body-semibold': ['18px', {lineHeight: '24px', fontWeight: '600'}],
-        'body-medium': ['18px', {lineHeight: '24px', fontWeight: '500'}],
-        body: ['18px', {lineHeight: '24px', fontWeight: '400'}],
+        'body-bold-lg': ['18px', {lineHeight: '24px', fontWeight: '700'}],
+        'body-semibold-aa-lg': [
+          '18px',
+          {lineHeight: '24px', fontWeight: '600'},
+        ],
+        'body-semibold-lg': ['18px', {lineHeight: '24px', fontWeight: '600'}],
+        'body-medium-lg': ['18px', {lineHeight: '24px', fontWeight: '500'}],
+        'body-lg': ['18px', {lineHeight: '24px', fontWeight: '400'}],
+
         'subtitle-semibold': ['18px', {lineHeight: '28px', fontWeight: '600'}],
         subtitle: ['18px', {lineHeight: '24px', fontWeight: '400'}],
         'subtitle-italic': [
@@ -35,7 +42,7 @@ module.exports = {
         'body-semibold': ['16px', {lineHeight: '24px', fontWeight: '600'}],
         'body-medium': ['16px', {lineHeight: '24px', fontWeight: '500'}],
         body: ['16px', {lineHeight: '24px', fontWeight: '400'}],
-
+      },
       colors: {
         white: '#FFFFFF',
         dark: '#0E0800',

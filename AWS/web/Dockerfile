@@ -1,43 +1,50 @@
-FROM node:18-alpine AS builder
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-COPY package*.json ./
-COPY yarn.lock* ./
-COPY pnpm-lock.yaml* ./
+RUN apk add --no-cache libc6-compat curl bash && \
+    corepack enable && corepack prepare yarn@4.9.1 --activate
 
-COPY tsconfig.json* ./
-COPY turbo.json* ./
+COPY package.json yarn.lock* .yarnrc.yml* ./
 
-COPY apps/web ./apps/web
+COPY apps/web/package.json ./apps/web/
+COPY packages/shared/package.json ./packages/shared/
 
-RUN if [ -f yarn.lock ]; then yarn install --frozen-lockfile; \
-    elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm install --frozen-lockfile; \
-    else npm ci; fi
+RUN yarn install
 
-WORKDIR /app/apps/web
-RUN if [ -f ../../yarn.lock ]; then yarn build; \
-    elif [ -f ../../pnpm-lock.yaml ]; then corepack enable pnpm && pnpm build; \
-    else npm run build; fi
+COPY apps/web/src/scripts/codegen.sh ./apps/web/src/scripts/codegen.sh
+RUN chmod +x ./apps/web/src/scripts/codegen.sh
 
-FROM node:18-alpine AS runner
+RUN mkdir -p ./apps/web/src/generated
+
+ENV NODE_ENV=stage
+
+RUN bash ./apps/web/src/scripts/codegen.sh stage ./apps/web/src/generated
+
+COPY . .
+
+RUN yarn workspace @code-project/shared build
+
+RUN yarn workspace @code-project/web build
+
+FROM node:20-alpine AS runner
 
 WORKDIR /app
+
+RUN apk add --no-cache libc6-compat
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-COPY --from=builder /app/apps/web/next.config.js ./
-COPY --from=builder /app/apps/web/public ./public
-COPY --from=builder /app/apps/web/package*.json ./
-COPY --from=builder /app/apps/web/.next/standalone ./
-COPY --from=builder /app/apps/web/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./apps/web/.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/public ./apps/web/public
 
 USER nextjs
 
 EXPOSE 3000
 
-ENV PORT 3000
-ENV HOSTNAME "0.0.0.0"
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
 
-CMD ["node", "server.js"]
+CMD ["node", "apps/web/server.js"]

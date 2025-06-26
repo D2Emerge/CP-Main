@@ -1,5 +1,5 @@
 'use client';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 
 import {zodResolver} from '@hookform/resolvers/zod';
@@ -11,7 +11,13 @@ import {LabeledInput} from '@src/components/core/LabeledInput';
 import {OAuthService} from '@src/generated';
 import {z} from 'zod';
 
-import {useOAuthParams} from './useOAuthParams';
+export interface OAuthParams {
+  clientId: string | null;
+  redirectUri: string | null;
+  responseType: string | null;
+  scope: string | null;
+  state: string | null;
+}
 
 const loginSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -159,4 +165,28 @@ export default function LoginPage({onSwitchToSignup}: LoginPageProps) {
       </div>
     </div>
   );
+}
+
+function useOAuthParams(): OAuthParams {
+  const [params, setParams] = useState<OAuthParams>({
+    clientId: null,
+    redirectUri: null,
+    responseType: null,
+    scope: null,
+    state: null,
+  });
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    setParams({
+      clientId: urlParams.get('client_id'),
+      redirectUri: urlParams.get('redirect_uri'),
+      responseType: urlParams.get('response_type'),
+      scope: urlParams.get('scope'),
+      state: urlParams.get('state'),
+    });
+  }, []);
+
+  return params;
 }
