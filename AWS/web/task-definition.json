@@ -34,7 +34,14 @@
           "name": "PORT",
           "value": "3000"
         }
-      ]
+      ],
+      "healthCheck": {
+        "command": ["CMD-SHELL", "exit 0"],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 60
+      }
     }
   ]
 }
