@@ -6,6 +6,7 @@ interface LogoWithTextProps {
   logoClassName?: string;
   mainTextClassName?: string;
   subTextClassName?: string;
+  withText?: boolean;
 }
 
 export const LogoWithText = ({
@@ -14,6 +15,7 @@ export const LogoWithText = ({
   mainTextClassName = 'text-dark',
   subTextClassName = 'text-txt-secondary',
   logoClassName = '-mt-5',
+  withText = true,
 }: LogoWithTextProps) => {
   return (
     <div className="flex items-center">
@@ -22,12 +24,14 @@ export const LogoWithText = ({
         height={height}
         className={logoClassName}
       />
-      <div className="flex flex-col justify-center ml-4">
-        <h1 className={`text-xl ${mainTextClassName}`}>
-          CODE <b className={`${mainTextClassName}`}>PROJECT</b>
-        </h1>
-        <p className={`text-xs ${subTextClassName}`}>For Those Who Code</p>
-      </div>
+      {withText && (
+        <div className="flex flex-col justify-center ml-4">
+          <h1 className={`text-xl ${mainTextClassName}`}>
+            CODE <b className={`${mainTextClassName}`}>PROJECT</b>
+          </h1>
+          <p className={`text-xs ${subTextClassName}`}>For Those Who Code</p>
+        </div>
+      )}
     </div>
   );
 };

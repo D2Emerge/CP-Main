@@ -1,3 +1,5 @@
+import {tailwindBreakpoints} from './src/constants/breakpoints';
+
 module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -72,6 +74,7 @@ module.exports = {
           light: '#F9F9F9',
         },
       },
+      screens: tailwindBreakpoints,
     },
   },
   plugins: [],

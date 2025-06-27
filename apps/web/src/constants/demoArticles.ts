@@ -1,6 +1,71 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
-export const demoArticles = [
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prettier/prettier */
+
+export type Article ={
+    ArticleId: string;
+    Title: string;
+    Filename: string;
+    Basename: string;
+    Slug: string;
+    Guid: string;
+    
+    Description: string;
+    Content: string;
+    Abstract: string;
+    NumberOfWords: string;
+    
+    Posted: string;
+    Updated: string;
+    Moved: string;
+    Deleted: string;
+    arc_Expires: string;
+    MetaDataUpdated: string;
+    LastThreadEditDate: string;
+    DateAccepted: string;
+    EditLockGained: string;
+    
+    EditorID: string;
+    ArticleTypeId: string;
+    TaxonomySubSectionId: string;
+    PublishingStatusID: string;
+    EditRestrictionID: string;
+    EditingStatusId: string;
+    TextFormatID: string;
+    LicenseID: string;
+    
+    PageViews: string;
+    DownloadCount: string;
+    ChildCount: string;
+    VersionNumber: string;
+    CRC: string;
+    
+    ParentID: string;
+    ArticleFeedID: string;
+    PrimaryReadingListId: string;
+    
+    EditLockMemberId: string;
+    LastThreadEditEditorID: string;
+    HasNonMinorChange: string;
+    
+    Comments: string;
+    AdZone: string;
+    arc_AttributeIDs: string;
+    arc_WorkspaceID: string;
+    arc_SourceCodeFrameUrl: string;
+    
+    SourceUrl: string;
+    Thumbnail: string;
+    
+    AdminNotes: string;
+    ArticleImagesProcessed: string;
+}
+
+
+
+export const demoArticles: Article[] = [
     {
         "ArticleId": "1",
         "Title": "Ut et zzril aliquyam nobis et molestie lorem gubergren nibh magna consetetur.",
@@ -10,7 +75,7 @@ export const demoArticles = [
         "Deleted": "",
         "arc_Expires": "",
         "MetaDataUpdated": "",
-        "Description.": "Sadipscing sed eirmod velit dolor. Elitr kasd erat in ipsum. Ex tempor consetetur nonummy dolor est consetetur accusam est stet id. Nonumy eirmod duo invidunt et et nisl gubergren diam duo vulputate duis erat sed sea facilisi aliquyam. No sit...",
+        "Description": "Sadipscing sed eirmod velit dolor. Elitr kasd erat in ipsum. Ex tempor consetetur nonummy dolor est consetetur accusam est stet id. Nonumy eirmod duo invidunt et et nisl gubergren diam duo vulputate duis erat sed sea facilisi aliquyam. No sit...",
         "EditorID": "4",
         "Filename": "1.aspx",
         "PageViews": "0",
@@ -59,7 +124,7 @@ export const demoArticles = [
         "Deleted": "",
         "arc_Expires": "",
         "MetaDataUpdated": "",
-        "Description.": "Sadipscing sed eirmod velit dolor. Elitr kasd erat in ipsum. Ex tempor consetetur nonummy dolor est consetetur accusam est stet id. Nonumy eirmod duo invidunt et et nisl gubergren diam duo vulputate duis erat sed sea facilisi aliquyam. No sit...",
+        "Description": "Sadipscing sed eirmod velit dolor. Elitr kasd erat in ipsum. Ex tempor consetetur nonummy dolor est consetetur accusam est stet id. Nonumy eirmod duo invidunt et et nisl gubergren diam duo vulputate duis erat sed sea facilisi aliquyam. No sit...",
         "EditorID": "4",
         "Filename": "1.aspx",
         "PageViews": "0",
