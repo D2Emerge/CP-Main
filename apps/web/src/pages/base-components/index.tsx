@@ -29,7 +29,7 @@ export default function Home() {
     <FormProvider {...methods}>
       <div className="bg-white p-10">
         <div className="">
-          <div className="flex flex-row items-start gap-4 p-4 rounded-lg">
+          <div className="flex flex-col md:flex-row items-start gap-4 p-4 rounded-lg">
             <div className="flex flex-col items-start gap-4">
               <h2 className="text-lg font-bold mb-4">New Buttons</h2>
 

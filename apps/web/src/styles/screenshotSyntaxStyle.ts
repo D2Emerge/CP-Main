@@ -6,7 +6,7 @@ export const screenshotStyle = {
     padding: '5px',
     borderRadius: '12px',
     margin: '1em 0',
-    overflow: 'auto',
+
     paddingLeft: '30px',
   },
   comment: {
