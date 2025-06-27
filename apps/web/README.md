@@ -23,8 +23,9 @@ yarn install
 
 ```bash
 # Development
-yarn dev           # Start development server
-yarn start:dev     # Start production server
+yarn dev           # Start development server with codegen from stage idp
+yarn dev:local     # Start development server with codegen from local idp
+yarn dev:prod      # Start development server with codegen from prod idp
 
 # Building
 yarn build        # Build for production

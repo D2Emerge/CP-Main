@@ -1,6 +1,6 @@
 set -e
 
-ENVIRONMENT=${1:-"local"}
+ENVIRONMENT=${1:-"stage"}
 OUTPUT_PATH=${2:-"./src/generated"}
 
 if [ "$ENVIRONMENT" = "local" ]; then
@@ -48,11 +48,11 @@ npx openapi-typescript-codegen \
 
 
 echo "✅ Frontend types generated successfully!"
+echo "📦 Package created at: $OUTPUT_PATH"
+echo "🔧 TypeScript configuration created for modern syntax support"
 echo ""
 echo "🔧 To use in your frontend:"
-echo "1. Copy the generated folder to your frontend project"
-echo "2. Install dependencies: cd $OUTPUT_PATH && npm install"
-echo "3. Import and use the generated types and services"
+echo "1. Import and use the generated types and services"
 echo ""
 echo "🚀 Example usage:"
 echo "import { UserService } from './path/to/generated';"
