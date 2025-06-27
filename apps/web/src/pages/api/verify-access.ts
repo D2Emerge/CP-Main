@@ -40,7 +40,7 @@ export default async function handler(
       });
     }
 
-    const correctCode = process.env.ACCESS_CONTROL_CODE;
+    const correctCode = process.env.ACCESS_CODE;
     if (!correctCode || code !== correctCode) {
       return res.status(401).json({
         error: 'Invalid code',
