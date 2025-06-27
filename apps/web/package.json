@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "yarn codegen && next dev",
+    "dev:local": "yarn codegen local && next dev",
+    "dev:prod": "yarn codegen prod && next dev",
     "build": "next build",
     "start:dev": "next start",
     "lint": "next lint",
@@ -17,6 +19,7 @@
     "@types/react-syntax-highlighter": "^15.5.13",
     "axios": "^1.9.0",
     "html-react-parser": "^5.2.5",
+    "jose": "^6.0.11",
     "next": "^14.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",

@@ -8,7 +8,7 @@ import {LogoWithText} from './core/LogoWithText';
 export function Layout({children}: {children: React.ReactNode}) {
   return (
     <div
-      className={`min-h-screen bg-gray-50 font-nunito ${nunito.variable} flex flex-col`}>
+      className={`min-h-screen bg-white font-nunito ${nunito.variable} flex flex-col`}>
       <div className="text-white text-sm py-2 px-4 text-center">
         <span className="text-dark">
           Trust Or Verify? - The Risks Lurking in AI-Generated Code | LIVE

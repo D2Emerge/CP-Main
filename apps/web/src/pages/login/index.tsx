@@ -1,6 +1,6 @@
 'use client';
 import {useEffect, useState} from 'react';
-import {Controller, useForm} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 
 import {zodResolver} from '@hookform/resolvers/zod';
 import {EyeClosed, EyeOpen} from '@src/assets/icons';
@@ -8,7 +8,7 @@ import {GithubLogo} from '@src/assets/icons/GithubLogo';
 import {GoogleLogo} from '@src/assets/icons/GoogleLogo';
 import {MicrosoftLogo} from '@src/assets/icons/MicrosoftLogo';
 import {LabeledInput} from '@src/components/core/LabeledInput';
-import {OAuthService} from '@src/generated';
+import {OAuthService} from '@src/generated/services/OAuthService';
 import {z} from 'zod';
 
 export interface OAuthParams {
@@ -36,9 +36,10 @@ export default function LoginPage({onSwitchToSignup}: LoginPageProps) {
 
   const {
     handleSubmit,
-    control,
     formState: {isSubmitting},
     reset,
+    register,
+    formState: {errors},
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
   });
@@ -89,32 +90,32 @@ export default function LoginPage({onSwitchToSignup}: LoginPageProps) {
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div>
-          <Controller
-            name="email"
-            control={control}
-            render={({field, fieldState}) => (
-              <LabeledInput
-                label="Email address"
-                type="email"
-                error={fieldState.error}
-                {...field}
-              />
-            )}
+          <LabeledInput
+            {...register('email', {
+              required: 'Please enter an email address',
+              validate: value =>
+                value.trim().length > 0 || 'Email address cannot be empty',
+            })}
+            label="Email address"
+            type="email"
+            error={errors.email}
+            disabled={isSubmitting}
+            autoComplete="email"
           />
         </div>
 
         <div className="relative">
-          <Controller
-            name="password"
-            control={control}
-            render={({field, fieldState}) => (
-              <LabeledInput
-                label="Password"
-                type={showPassword ? 'text' : 'password'}
-                error={fieldState.error}
-                {...field}
-              />
-            )}
+          <LabeledInput
+            {...register('password', {
+              required: 'Please enter a password',
+              validate: value =>
+                value.trim().length > 0 || 'Password cannot be empty',
+            })}
+            label="Password"
+            type={showPassword ? 'text' : 'password'}
+            error={errors.password}
+            disabled={isSubmitting}
+            autoComplete="password"
           />
           <button
             type="button"
