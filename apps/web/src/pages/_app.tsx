@@ -1,4 +1,5 @@
 import type {AppProps} from 'next/app';
+import Head from 'next/head';
 
 import {Layout} from '@src/components/Layout';
 import {OpenAPI} from '@src/generated';
@@ -16,10 +17,15 @@ const queryClient = new QueryClient();
 
 export default function App({Component, pageProps}: AppProps) {
   return (
-    <Layout>
-      <QueryClientProvider client={queryClient}>
-        <Component {...pageProps} />
-      </QueryClientProvider>
-    </Layout>
+    <>
+      <Head>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+      </Head>
+      <Layout>
+        <QueryClientProvider client={queryClient}>
+          <Component {...pageProps} />
+        </QueryClientProvider>
+      </Layout>
+    </>
   );
 }
